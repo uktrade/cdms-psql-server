@@ -40,7 +40,7 @@ conn = psycopg2.connect(app.config['DATABASE_URI'])
 @app.route("/company-search", methods=['POST'])
 def search_companies():
     try:
-        term = request.json['term']
+        term = ' & '.join(request.json['term'].split(' '))
         limit = request.json.get('limit', 50)
         offset = request.json.get('offset', 0)
     except KeyError:
